@@ -28,5 +28,8 @@
         "tsyringe": "4.8.0",
         "typescript": "5.8.2",
         "winston": "3.12"
+    },
+    "dependencies": {
+        "@types/archiver": "^7.0.0"
     }
 }

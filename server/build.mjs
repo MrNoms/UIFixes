@@ -37,8 +37,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import winston from "winston";
 
-const sptPaths = ["/SPT/3.11", "d:/fika", "d:/fika2"];
-
 // Get the command line arguments to determine whether to use verbose logging.
 const args = process.argv.slice(2);
 const verbose = args.includes("--verbose") || args.includes("-v");
@@ -117,14 +115,6 @@ async function main() {
         logger.log("info", "Beginning copy operation using .buildignore file...");
         await copyFiles(currentDir, projectDir, buildIgnorePatterns);
         logger.log("success", "Files successfully copied to temporary directory.");
-
-        // Copy output to SPT installation for testing
-        logger.log("info", "Copying output to SPT installation");
-        for (const sptPath of sptPaths) {
-            const sptModPath = path.join(sptPath, "/user/mods/", projectShortName);
-            await fs.copy(projectDir, sptModPath);
-            logger.log("success", `Files successfully copied to ${sptModPath}`);
-        }
 
         // Copy output to parent dist folder
         logger.log("info", "Copying output to SPT installation");

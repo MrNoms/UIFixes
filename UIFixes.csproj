@@ -15,12 +15,12 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <SPTPath>..\..\..\..\SPT\3.11</SPTPath>
+    <SPTPath>D:\SPT_3.11</SPTPath>
   </PropertyGroup>
 
   <ItemGroup>
     <DeployTarget Include="Default">
-      <Path>$(ProjectDir)$(SPTPath)</Path>
+      <Path>$(ProjectDir)dist</Path>
     </DeployTarget>
     <DeployTarget Include="Release" Condition="'$(Configuration)'=='Release'">
       <Path>$(ProjectDir)dist</Path>
@@ -56,7 +56,7 @@
       <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\CommonExtensions.dll</HintPath>
     </Reference>
     <Reference Include="Fika.Core">
-      <HintPath>D:\fika\BepInEx\plugins\Fika.Core.dll</HintPath>
+      <HintPath>D:\SPT_Libraries\Fika.1.2.8.Client.Server\BepInEx\plugins\Fika.Core.dll</HintPath>
     </Reference>
     <Reference Include="ItemComponent.Types">
       <HintPath>$(SPTPath)\EscapeFromTarkov_Data\Managed\ItemComponent.Types.dll</HintPath>

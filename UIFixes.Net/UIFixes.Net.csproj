@@ -10,27 +10,21 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <SPTPath>..\..\..\..\..\SPT\3.11</SPTPath>
+    <SPTPath>D:\SPT_3.11</SPTPath>
   </PropertyGroup>
 
   <ItemGroup>
     <DeployTarget Include="Default">
-      <Path>$(ProjectDir)$(SPTPath)</Path>
+      <Path>$(ProjectDir)..\dist</Path>
     </DeployTarget>
     <DeployTarget Include="Release" Condition="'$(Configuration)'=='Release'">
       <Path>$(ProjectDir)..\dist</Path>
     </DeployTarget>
-    <!-- <DeployTarget Include="Fika1">
-      <Path>d:\fika</Path>
-    </DeployTarget>
-    <DeployTarget Include="Fika2">
-      <Path>d:\fika2</Path>
-    </DeployTarget> -->
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Fika.Core">
-      <HintPath>d:\fika\BepInEx\plugins\Fika.Core.dll</HintPath>
+      <HintPath>D:\SPT_Libraries\Fika.1.2.8.Client.Server\BepInEx\plugins\Fika.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
 
