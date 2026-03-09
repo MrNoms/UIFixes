@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BepInEx.Configuration;
 using Comfort.Common;
 using EFT.UI;
 using EFT.UI.DragAndDrop;
@@ -224,16 +223,28 @@ public class DrawMultiSelect : MonoBehaviour
         // Windows are clickable to focus them, but that shouldn't block selection
         var windows = allParents
             .Where(c => c is UIInputNode) // Windows<>'s parent, cheap check
-            .Where(c =>
-            {
-                Type baseType = c.GetType().BaseType;
-                return baseType != null && baseType.IsGenericType && baseType.GetGenericTypeDefinition() == typeof(Window<>);
-            });
+            .Where(IsWindow);
 
         clickables = clickables.Except(windows);
         draggables = draggables.Except(windows);
 
         return draggables.Any() || clickables.Any();
+    }
+
+    private bool IsWindow(MonoBehaviour component)
+    {
+        Type type = component.GetType();
+        while (type != typeof(MonoBehaviour))
+        {
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Window<>))
+            {
+                return true;
+            }
+
+            type = type.BaseType;
+        }
+
+        return false;
     }
 
     private bool IsBlocked(GameObject mouseTarget)
