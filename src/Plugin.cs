@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Reflection;
 using BepInEx;
 using BepInEx.Bootstrap;
 using BepInEx.Logging;
 using Comfort.Common;
 using EFT;
-using SPT;
-using SPT.Reflection.Utils;
 using TMPro;
 using UnityEngine.EventSystems;
 
@@ -117,18 +114,6 @@ public class Plugin : BaseUnityPlugin
         return EventSystem.current?.currentSelectedGameObject != null &&
             EventSystem.current.currentSelectedGameObject.activeInHierarchy &&
             EventSystem.current.currentSelectedGameObject.GetComponent<TMP_InputField>() != null;
-    }
-
-    private void CheckForTypeChanges()
-    {
-        foreach (var type in PatchConstants.EftTypes)
-        {
-            var attr = type.GetCustomAttribute<SPTRenamedClassAttribute>();
-            if (attr != null && attr.HasChangesFromPreviousVersion)
-            {
-                Logger.LogInfo($"Type: {type.Name} has had changes!");
-            }
-        }
     }
 
     private static bool? IsFikaPresent;
