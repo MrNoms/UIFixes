@@ -69,6 +69,7 @@ public static class R
         FoldOperationResult.InitTypes();
         LightScroller.InitTypes();
         ModSlotView.InitTypes();
+        ItemContext.InitTypes();
     }
 
     public abstract class Wrapper(object value)
@@ -857,6 +858,26 @@ public static class R
 
         public string Error { get { return (string)ErrorStructErrorInfo.GetValue(ErrorStructInfo.GetValue(Value)); } }
     }
+
+    public class ItemContext(object value) : Wrapper(value)
+    {
+        public static Type Type { get; private set; }
+        private static PropertyInfo ItemContextProperty;
+        private static FieldInfo ItemContextField;
+
+        public static void InitTypes()
+        {
+            Type = typeof(ItemContextAbstractClass);
+
+            ItemContextField = AccessTools.Field(Type, "ItemContextAbstractClass_1");
+            ItemContextProperty = AccessTools.Property(Type, "ItemContextAbstractClass_1");
+        }
+
+        public ItemContextAbstractClass GetParentContext()
+        {
+            return (ItemContextAbstractClass)ItemContextProperty.GetValue(Value);
+        }
+    }
 }
 
 public static class RExtentensions
@@ -893,4 +914,5 @@ public static class RExtentensions
     public static R.FoldOperationResult R(this FoldOperation value) => new(value);
     public static R.LightScroller R(this LightScroller value) => new(value);
     public static R.ModSlotView R(this ModSlotView value) => new(value);
+    public static R.ItemContext R(this ItemContextAbstractClass value) => new(value);
 }
